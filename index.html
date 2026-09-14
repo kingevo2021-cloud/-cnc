@@ -9,8 +9,7 @@
 *{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#222}
 button,input,textarea,select{font:inherit}button{cursor:pointer}
 .top{background:#0d1c27;color:#fff;padding:8px 4%;display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:13px}
-.top-image{width:44px;height:44px;object-fit:contain;border-radius:7px;background:#fff;display:none;margin-right:8px}
-.social{display:flex;align-items:center}.social span{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;margin-left:5px;background:#fff;color:#0d1c27}
+.top-left-tools{display:flex;align-items:center;gap:10px;order:-1}.top-image-frame{width:52px;height:52px;border:2px solid var(--gold);border-radius:10px;background:#fff;display:none;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 2px 8px #00000025}.top-image{width:100%;height:100%;object-fit:contain;display:block}.social{display:flex;align-items:center}.social span{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;margin-left:5px;background:#fff;color:#0d1c27}
 .nav{background:#102530;color:#fff;padding:13px 4%;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:20}
 .logo{display:flex;align-items:center;gap:10px;margin-left:auto;font-weight:bold}.logo-mark{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#fff);display:grid;place-items:center;color:var(--primary);font-weight:900}
 .navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:#fff;text-decoration:none;font-size:14px}.search{margin-right:auto;min-width:220px}.search input{width:100%;border:0;border-radius:24px;padding:10px 16px;background:#263946;color:white}
@@ -43,12 +42,12 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 .detail-item b{display:block;color:var(--primary);margin-bottom:4px}
 .details-actions{display:flex;gap:10px;flex-wrap:wrap}.card .btn{margin:3px 2px}
 .category-cover{height:260px}
-@media(max-width:600px){.details-cover{height:210px}.details-grid{grid-template-columns:1fr}.details-content{padding:17px}}
+@media(max-width:600px){.top-image-frame{width:42px;height:42px}.top{padding:7px 3%;}.top>div:first-child{font-size:11px}.details-cover{height:210px}.details-grid{grid-template-columns:1fr}.details-content{padding:17px}}
 
 </style>
 </head>
 <body>
-<div class="top"><div>متجر أعمال CNC للنجارة والديكورات</div><div class="social"><img id="topImage" class="top-image" alt=""><span>◉</span><span>▶</span><span>◎</span><span>f</span><span>➤</span></div></div>
+<div class="top"><div>متجر أعمال CNC للنجارة والديكورات</div><div class="top-left-tools"><div id="topImageFrame" class="top-image-frame"><img id="topImage" class="top-image" alt=""></div><div class="social"><span>◉</span><span>▶</span><span>◎</span><span>f</span><span>➤</span></div></div></div>
 <nav class="nav">
 <div class="logo"><div class="logo-mark" id="logoMark">CNC</div><span id="storeName">متجر CNC للنجارة والديكورات</span></div>
 <div class="navlinks"><a href="#">الرئيسية</a><a href="#categories">الأقسام</a><a href="#products">المنتجات</a><a href="#services">الخدمات</a><a href="#about">من نحن</a><a href="#contact">تواصل معنا</a></div>
@@ -97,7 +96,7 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 
 
 <div id="pageControl" class="admin-section">
-<h3>التحكم الكامل بأجزاء الصفحة</h3><div class="admin-note">الصور والشعارات والأيقونات يمكن اختيارها مباشرة من استوديو/ملفات جهازك. لا حاجة لرفعها إلى موقع خارجي.</div>
+<h3>التحكم الكامل بأجزاء الصفحة</h3><div class="admin-note">إطار صورة الجهة اليسرى يظهر بجانب أيقونات التواصل في الشريط العلوي، ويمكن تغيير حجمه. الصور والشعارات والأيقونات يمكن اختيارها مباشرة من استوديو/ملفات جهازك. لا حاجة لرفعها إلى موقع خارجي.</div>
 <p>يمكنك تعديل النصوص والصور وإظهار أو إخفاء كل جزء من الصفحة. جميع التغييرات تحفظ محلياً ويمكن الرجوع للنسخة الأصلية في الملف الآخر.</p>
 <div class="form">
 <label>عنوان البانر الرئيسي<input id="heroTitleInput"></label>
@@ -110,7 +109,7 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 <label class="full">النص أعلى الموقع<input id="topTextInput"></label>
 <label>رابط صورة الشريط العلوي<input id="topImageInput" placeholder="رابط الصورة أو اتركه فارغاً للرفع من الجهاز"></label>
 <label>رفع صورة من الاستوديو<input id="topImageFile" type="file" accept="image/*" onchange="readTopImageFile(event)"></label>
-<label>وصف الصورة<input id="topImageAltInput"></label><div><button type="button" class="btn danger" onclick="clearHeroImage()">حذف صورة البانر</button></div><div><button type="button" class="btn danger" onclick="clearTopImage()">حذف صورة الشريط العلوي</button></div>
+<label>وصف الصورة<input id="topImageAltInput"></label><label>حجم إطار الصورة<select id="topImageSizeInput"><option value="44">صغير</option><option value="52" selected>متوسط</option><option value="64">كبير</option><option value="80">كبير جداً</option></select></label><div><button type="button" class="btn danger" onclick="clearHeroImage()">حذف صورة البانر</button></div><div><button type="button" class="btn danger" onclick="clearTopImage()">حذف صورة الشريط العلوي</button></div>
 </div>
 <h4>إظهار/إخفاء أجزاء الصفحة</h4>
 <div class="form">
@@ -175,7 +174,7 @@ name:"متجر CNC للنجارة والديكورات",logo:"",phone:"+967 700 
 about:"متجر متخصص في أعمال CNC والنجارة والديكورات والموبيليا، نقدم تصاميم وتنفيذات مخصصة بجودة عالية.",
 colors:{primary:"#5d3a1a",gold:"#c9a84c",bg:"#f5f0e8",dark:"#10202b"},
 page:{
- topImage:"", topImageAlt:"صورة المتجر في الشريط العلوي",
+ topImage:"", topImageAlt:"صورة المتجر في الشريط العلوي",topImageSize:52,
  heroTitle:"فن الخشب بدقة CNC", heroText:"تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.",
  heroButton:"تصفح الأقسام", heroImage:"https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80",
  topText:"متجر أعمال CNC للنجارة والديكورات",
@@ -208,7 +207,7 @@ function normalizeCatalogDetails(){
 }
 
 function ensurePage(){
- if(!data.page)data.page={topImage:"",topImageAlt:"صورة المتجر في الشريط العلوي",heroTitle:"فن الخشب بدقة CNC",heroText:"تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.",heroButton:"تصفح الأقسام",heroImage:"https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80",topText:"متجر أعمال CNC للنجارة والديكورات",bannerTitle:"اطلب تصميمك الخاص",bannerText:"سنحوّل فكرتك إلى واقع باستخدام أحدث تقنيات CNC",features:[],sections:{top:true,nav:true,hero:true,features:true,categories:true,banner:true,products:true,services:true,about:true,footer:true}};
+ if(!data.page)data.page={topImage:"",topImageAlt:"صورة المتجر في الشريط العلوي",topImageSize:52,heroTitle:"فن الخشب بدقة CNC",heroText:"تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.",heroButton:"تصفح الأقسام",heroImage:"https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80",topText:"متجر أعمال CNC للنجارة والديكورات",bannerTitle:"اطلب تصميمك الخاص",bannerText:"سنحوّل فكرتك إلى واقع باستخدام أحدث تقنيات CNC",features:[],sections:{top:true,nav:true,hero:true,features:true,categories:true,banner:true,products:true,services:true,about:true,footer:true}};
  if(!data.page.features||data.page.features.length!==4)data.page.features=[{icon:"🛡️",iconImage:"",title:"جودة عالية",text:"في كل التفاصيل",show:true},{icon:"⚙️",iconImage:"",title:"دقة متناهية",text:"أحدث تقنيات CNC",show:true},{icon:"🎨",iconImage:"",title:"تصاميم مخصصة",text:"حسب رغبتك",show:true},{icon:"🛠️",iconImage:"",title:"تنفيذ احترافي",text:"بأيدي خبراء",show:true}];
  if(!data.page.sections)data.page.sections={top:true,nav:true,hero:true,features:true,categories:true,banner:true,products:true,services:true,about:true,footer:true};
 }
@@ -219,7 +218,7 @@ function apply(){
  document.querySelector(".top>div:first-child").textContent=data.page.topText;
  const topImg=document.getElementById("topImage");
  topImg.src=data.page.topImage||""; topImg.alt=data.page.topImageAlt||"صورة المتجر";
- topImg.style.display=data.page.topImage?"inline-block":"none";
+ const topFrame=document.getElementById("topImageFrame");topFrame.style.display=data.page.topImage?"flex":"none";topFrame.style.width=(data.page.topImageSize||52)+"px";topFrame.style.height=(data.page.topImageSize||52)+"px";
  document.getElementById("heroTitle").textContent=data.page.heroTitle;document.getElementById("heroText").textContent=data.page.heroText;
  document.querySelector(".hero .btn").textContent=data.page.heroButton+" ←";
  document.querySelector(".hero").style.backgroundImage='linear-gradient(90deg,rgba(10,20,25,.85),rgba(10,20,25,.25)),url("'+data.page.heroImage+'")';
@@ -243,7 +242,7 @@ function apply(){
 }
 function loadPageControl(){
  ensurePage();let p=data.page;
- topImageInput.value=p.topImage&&p.topImage.startsWith("http")?p.topImage:"";topImageAltInput.value=p.topImageAlt||"صورة المتجر في الشريط العلوي";heroTitleInput.value=p.heroTitle;heroTextInput.value=p.heroText;heroButtonInput.value=p.heroButton;heroImageInput.value=p.heroImage;bannerTitleInput.value=p.bannerTitle;bannerTextInput.value=p.bannerText;topTextInput.value=p.topText;
+ topImageInput.value=p.topImage&&p.topImage.startsWith("http")?p.topImage:"";topImageAltInput.value=p.topImageAlt||"صورة المتجر في الشريط العلوي";topImageSizeInput.value=p.topImageSize||52;heroTitleInput.value=p.heroTitle;heroTextInput.value=p.heroText;heroButtonInput.value=p.heroButton;heroImageInput.value=p.heroImage;bannerTitleInput.value=p.bannerTitle;bannerTextInput.value=p.bannerText;topTextInput.value=p.topText;
  ["top","nav","hero","features","categories","banner","products","services","about","footer"].forEach(k=>document.getElementById("show"+k.charAt(0).toUpperCase()+k.slice(1)).checked=p.sections[k]!==false);
  p.features.forEach((f,i)=>{document.getElementById("f"+(i+1)+"title").value=f.title;document.getElementById("f"+(i+1)+"text").value=f.text;document.getElementById("f"+(i+1)+"icon").value=f.icon||"";pendingFeatureIcons[i+1]=f.iconImage||""});
 }
@@ -261,7 +260,7 @@ function readTopImageFile(e){
 }
 function savePageControl(){
  ensurePage();let p=data.page;
- p.topImage=topImageInput.value||p.topImage||"";p.topImageAlt=topImageAltInput.value||"صورة المتجر في الشريط العلوي";p.heroTitle=heroTitleInput.value||p.heroTitle;p.heroText=heroTextInput.value||p.heroText;p.heroButton=heroButtonInput.value||p.heroButton;p.heroImage=pendingHeroImage||heroImageInput.value||p.heroImage;p.bannerTitle=bannerTitleInput.value||p.bannerTitle;p.bannerText=bannerTextInput.value||p.bannerText;p.topText=topTextInput.value||p.topText;
+ p.topImage=topImageInput.value||p.topImage||"";p.topImageAlt=topImageAltInput.value||"صورة المتجر في الشريط العلوي";p.topImageSize=+topImageSizeInput.value||52;p.heroTitle=heroTitleInput.value||p.heroTitle;p.heroText=heroTextInput.value||p.heroText;p.heroButton=heroButtonInput.value||p.heroButton;p.heroImage=pendingHeroImage||heroImageInput.value||p.heroImage;p.bannerTitle=bannerTitleInput.value||p.bannerTitle;p.bannerText=bannerTextInput.value||p.bannerText;p.topText=topTextInput.value||p.topText;
  ["top","nav","hero","features","categories","banner","products","services","about","footer"].forEach(k=>p.sections[k]=document.getElementById("show"+k.charAt(0).toUpperCase()+k.slice(1)).checked);
  for(let i=0;i<4;i++){p.features[i]={icon:document.getElementById("f"+(i+1)+"icon").value||"•",iconImage:pendingFeatureIcons[i+1]||p.features[i].iconImage||"",title:document.getElementById("f"+(i+1)+"title").value||"",text:document.getElementById("f"+(i+1)+"text").value||"",show:true}}
  persist();apply();pendingHeroImage="";Object.keys(pendingFeatureIcons).forEach(k=>pendingFeatureIcons[k]="");toast("تم حفظ أجزاء الصفحة وتطبيق التعديلات");
