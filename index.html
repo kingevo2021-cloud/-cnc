@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>متجر CNC للنجارة والديكورات</title>
+<style>
+:root{--primary:#5d3a1a;--gold:#c9a84c;--bg:#f5f0e8;--dark:#10202b;--white:#fff;--wa:#25d366}
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:var(--bg);color:#222}
+button,input,textarea,select{font:inherit}button{cursor:pointer}
+.top{background:#0d1c27;color:#fff;padding:8px 4%;display:flex;justify-content:space-between;gap:15px;align-items:center;font-size:13px}
+.social span{display:inline-flex;width:28px;height:28px;border-radius:50%;align-items:center;justify-content:center;margin-left:5px;background:#fff;color:#0d1c27}
+.nav{background:#102530;color:#fff;padding:13px 4%;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:20}
+.logo{display:flex;align-items:center;gap:10px;margin-left:auto;font-weight:bold}.logo-mark{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#fff);display:grid;place-items:center;color:var(--primary);font-weight:900}
+.navlinks{display:flex;gap:18px;flex-wrap:wrap}.navlinks a{color:#fff;text-decoration:none;font-size:14px}.search{margin-right:auto;min-width:220px}.search input{width:100%;border:0;border-radius:24px;padding:10px 16px;background:#263946;color:white}
+.hero{min-height:390px;background:linear-gradient(90deg,rgba(10,20,25,.85),rgba(10,20,25,.25)),url("https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80") center/cover;display:flex;align-items:center;padding:40px 8%;color:#fff}.hero h1{font-size:clamp(34px,5vw,62px);margin:0 0 12px}.hero p{font-size:18px;max-width:650px;line-height:1.8}.btn{border:0;border-radius:25px;padding:12px 25px;background:var(--gold);color:#20160b;font-weight:bold}.outline{background:transparent;border:1px solid var(--gold);color:var(--primary)}
+.features{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;padding:20px 5%;gap:10px;text-align:center}.feature{padding:15px;border-left:1px solid #ddd}.feature:last-child{border:0}.feature b{display:block;font-size:18px;color:var(--primary);margin-bottom:5px}
+.container{max-width:1250px;margin:auto;padding:35px 20px}.title{text-align:right;margin-bottom:20px}.title h2{color:var(--primary);margin-bottom:5px}.title p{color:#777}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.card{background:#fff;border:1px solid #ddd;border-radius:10px;overflow:hidden;box-shadow:0 3px 10px #0000000b}.card img{width:100%;height:190px;object-fit:cover}.card-body{padding:14px}.card h3{margin:0 0 8px;color:#26313a;font-size:17px}.price{font-weight:bold;color:var(--primary);font-size:18px}.old{text-decoration:line-through;color:#999;font-size:13px;margin-right:8px}.card-actions{display:flex;gap:7px;margin-top:12px}.card-actions button{flex:1;padding:9px;border-radius:20px;border:1px solid var(--gold);background:#fff;color:var(--primary)}
+.banner{margin:20px 0;border-radius:12px;padding:28px;background:linear-gradient(90deg,#0d1b26,#243746);color:white;display:flex;justify-content:space-between;align-items:center;gap:20px}.banner h2{margin:0 0 8px;color:#fff}
+footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.footer-logo{font-size:20px;font-weight:bold;color:var(--gold)}footer a{color:#fff;display:block;margin:7px 0;text-decoration:none}
+.admin{position:fixed;inset:0;background:#0009;z-index:100;display:none}.admin.open{display:block}.panel{background:#fff;width:min(1100px,95%);height:92vh;margin:4vh auto;border-radius:15px;overflow:auto;padding:22px}.admin-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ddd;padding-bottom:15px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:0;background:#eee;padding:10px 16px;border-radius:20px}.tab.active{background:var(--primary);color:#fff}.admin-section{display:none}.admin-section.active{display:block}.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.form label{font-weight:bold}.form input,.form textarea,.form select{width:100%;padding:10px;border:1px solid #ccc;border-radius:8px;margin-top:5px}.form textarea{min-height:90px}.full{grid-column:1/-1}.admin-list{margin-top:20px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid #ddd;padding:10px;margin-bottom:8px;border-radius:8px}.row img{width:65px;height:50px;object-fit:cover;border-radius:6px}.danger{background:#b42318!important;color:white!important;border:0!important}.green{background:var(--wa)!important;color:#fff!important;border:0!important}.close{background:#eee;border:0;border-radius:50%;width:38px;height:38px;font-size:20px}
+.cart{position:fixed;bottom:20px;left:20px;background:var(--gold);border:0;border-radius:50%;width:58px;height:58px;z-index:30;font-size:20px}.cart-count{position:absolute;top:-3px;right:-3px;background:#b42318;color:#fff;border-radius:50%;font-size:11px;padding:4px 7px}
+.toast{position:fixed;bottom:20px;right:20px;background:#102530;color:#fff;padding:12px 18px;border-radius:8px;display:none;z-index:200}.toast.show{display:block}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:repeat(2,1fr)}footer{grid-template-columns:1fr 1fr}.navlinks{display:none}.search{min-width:150px}.form{grid-template-columns:1fr}}
+@media(max-width:550px){.grid{grid-template-columns:1fr}.features{grid-template-columns:1fr}.hero{min-height:330px;padding:30px 5%}.hero h1{font-size:34px}.banner{display:block}footer{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="top"><div>متجر أعمال CNC للنجارة والديكورات</div><div class="social"><span>◉</span><span>▶</span><span>◎</span><span>f</span><span>➤</span></div></div>
+<nav class="nav">
+<div class="logo"><div class="logo-mark" id="logoMark">CNC</div><span id="storeName">متجر CNC للنجارة والديكورات</span></div>
+<div class="navlinks"><a href="#">الرئيسية</a><a href="#categories">الأقسام</a><a href="#products">المنتجات</a><a href="#services">الخدمات</a><a href="#about">من نحن</a><a href="#contact">تواصل معنا</a></div>
+<div class="search"><input id="search" placeholder="ابحث عن منتجاتنا..." oninput="renderProducts()"></div>
+<button class="btn" onclick="openAdmin()">⚙ الإدارة</button>
+</nav>
+
+<section class="hero"><div><h1 id="heroTitle">فن الخشب بدقة CNC</h1><p id="heroText">تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.</p><button class="btn" onclick="document.getElementById('categories').scrollIntoView()">تصفح الأقسام ←</button></div></section>
+
+<section class="features">
+<div class="feature">🛡️<b>جودة عالية</b><small>في كل التفاصيل</small></div>
+<div class="feature">⚙️<b>دقة متناهية</b><small>أحدث تقنيات CNC</small></div>
+<div class="feature">🎨<b>تصاميم مخصصة</b><small>حسب رغبتك</small></div>
+<div class="feature">🛠️<b>تنفيذ احترافي</b><small>بأيدي خبراء</small></div>
+</section>
+
+<main class="container">
+<section id="categories"><div class="title"><h2>أقسام المتجر</h2><p>اختر من بين أقسامنا المتنوعة</p></div><div class="grid" id="categoryGrid"></div></section>
+<div class="banner"><div><h2>اطلب تصميمك الخاص</h2><div>سنحوّل فكرتك إلى واقع باستخدام أحدث تقنيات CNC</div></div><button class="btn" onclick="whatsapp()">تواصل معنا</button></div>
+<section id="products"><div class="title"><h2>أحدث المنتجات</h2><p>تصفح أحدث أعمالنا ومنتجاتنا</p></div><div class="grid" id="productGrid"></div></section>
+<section id="services"><div class="title"><h2>خدماتنا</h2><p>خدمات CNC والتصميم والتنفيذ حسب الطلب</p></div><div class="grid" id="serviceGrid"></div></section>
+<section id="about" class="banner"><div><h2>من نحن</h2><p id="aboutText">متجر متخصص في أعمال CNC والنجارة والديكورات والموبيليا، نقدم تصاميم وتنفيذات مخصصة بجودة عالية.</p></div></section>
+</main>
+
+<footer id="contact"><div><div class="footer-logo" id="footerName">متجر CNC للنجارة والديكورات</div><p>تنفيذ أعمال CNC والديكورات والموبيليا حسب الطلب.</p></div><div><b>روابط سريعة</b><a href="#">الرئيسية</a><a href="#products">المنتجات</a><a href="#services">الخدمات</a></div><div><b>تواصل معنا</b><p id="phone">+967 700 000 000</p><p id="email">info@cnc-store.com</p><button class="btn" onclick="whatsapp()">واتساب</button></div></footer>
+
+<button class="cart" onclick="showCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
+<div class="toast" id="toast"></div>
+
+<div class="admin" id="admin">
+<div class="panel">
+<div class="admin-head"><h2>لوحة التحكم الكاملة</h2><button class="close" onclick="closeAdmin()">×</button></div>
+<div class="tabs">
+<button class="tab active" onclick="tab('products',this)">المنتجات</button><button class="tab" onclick="tab('categoriesAdmin',this)">الأقسام</button><button class="tab" onclick="tab('servicesAdmin',this)">الخدمات</button><button class="tab" onclick="tab('store',this)">هوية المتجر</button><button class="tab" onclick="tab('appearance',this)">الألوان والمظهر</button><button class="tab" onclick="tab('settings',this)">الإدارة والإعدادات</button>
+</div>
+
+<div id="products" class="admin-section active">
+<h3>إضافة / تعديل منتج</h3><div class="form">
+<label>اسم المنتج<input id="pName"></label><label>السعر<input id="pPrice" type="number"></label>
+<label>السعر السابق<input id="pOld" type="number"></label><label>القسم<input id="pCat"></label>
+<label class="full">رابط الصورة<input id="pImg"></label><label class="full">الوصف<textarea id="pDesc"></textarea></label>
+</div><br><button class="btn" onclick="saveProduct()">حفظ المنتج</button><button class="btn outline" onclick="clearProductForm()">جديد</button>
+<div class="admin-list" id="productAdminList"></div>
+</div>
+
+<div id="categoriesAdmin" class="admin-section"><h3>إدارة الأقسام</h3><div class="form"><label>اسم القسم<input id="cName"></label><label>الصورة<input id="cImg"></label></div><br><button class="btn" onclick="saveCategory()">إضافة القسم</button><div class="admin-list" id="categoryAdminList"></div></div>
+
+<div id="servicesAdmin" class="admin-section"><h3>إدارة الخدمات</h3><div class="form"><label>اسم الخدمة<input id="sName"></label><label>السعر<input id="sPrice"></label><label class="full">الصورة<input id="sImg"></label><label class="full">الوصف<textarea id="sDesc"></textarea></label></div><br><button class="btn" onclick="saveService()">إضافة الخدمة</button><div class="admin-list" id="serviceAdminList"></div></div>
+
+<div id="store" class="admin-section"><h3>هوية المتجر</h3><div class="form">
+<label>اسم المتجر<input id="storeNameInput"></label><label>رابط الشعار<input id="logoInput"></label>
+<label>رقم الهاتف<input id="phoneInput"></label><label>واتساب<input id="waInput"></label><label>البريد<input id="emailInput"></label><label>العنوان<input id="addressInput"></label>
+<label class="full">نبذة المتجر<textarea id="aboutInput"></textarea></label>
+</div><br><button class="btn" onclick="saveStore()">حفظ الهوية</button></div>
+
+<div id="appearance" class="admin-section"><h3>تخصيص المظهر</h3><div class="form">
+<label>اللون الرئيسي<input id="primaryInput" type="color"></label><label>اللون الذهبي<input id="goldInput" type="color"></label><label>لون الخلفية<input id="bgInput" type="color"></label><label>لون الهيدر<input id="darkInput" type="color"></label>
+</div><br><button class="btn" onclick="saveAppearance()">حفظ الألوان</button></div>
+
+<div id="settings" class="admin-section"><h3>إعدادات الإدارة</h3><div class="form"><label>اسم مستخدم المدير<input id="adminUser"></label><label>كلمة مرور المدير<input id="adminPass" type="password"></label><label class="full">وسائل التواصل<textarea id="socialInput" placeholder="ضع الروابط مفصولة بفواصل"></textarea></label></div><br><button class="btn" onclick="saveAdmin()">حفظ الإعدادات</button><button class="btn danger" onclick="resetDemo()">إعادة البيانات الافتراضية</button></div>
+</div></div>
+
+<script>
+const img1="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80";
+const img2="https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=900&q=80";
+const img3="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80";
+const img4="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=900&q=80";
+let data=JSON.parse(localStorage.getItem("cncStoreData")||"null")||{
+name:"متجر CNC للنجارة والديكورات",logo:"",phone:"+967 700 000 000",wa:"967700000000",email:"info@cnc-store.com",address:"اليمن",
+about:"متجر متخصص في أعمال CNC والنجارة والديكورات والموبيليا، نقدم تصاميم وتنفيذات مخصصة بجودة عالية.",
+colors:{primary:"#5d3a1a",gold:"#c9a84c",bg:"#f5f0e8",dark:"#10202b"},
+categories:[
+{name:"المطابخ الخشبية",img:img1},{name:"CNC خدمات",img:img2},{name:"أبواب ونوافذ خشبية",img:img3},{name:"أثاث وديكورات منزلية",img:img4},
+{name:"سقف خشبي مزخرف",img:img2},{name:"باب خشب CNC",img:img3},{name:"مكتبة تلفزيون خشب",img:img1},{name:"لوحة جدارية",img:img4}],
+products:[
+{name:"لوحة فنية خشبية",price:1200,old:1500,cat:"لوحات",img:img4,desc:"لوحة خشبية CNC بتفاصيل دقيقة."},
+{name:"باب خشب CNC",price:2500,old:3000,cat:"أبواب",img:img3,desc:"باب خشبي بتصميم CNC مخصص."},
+{name:"مكتبة تلفزيون خشب",price:1800,old:2200,cat:"موبيليا",img:img1,desc:"مكتبة تلفزيون عصرية من الخشب."},
+{name:"سقف خشبي مزخرف",price:1500,old:1800,cat:"أسقف",img:img2,desc:"زخارف خشبية فاخرة للأسقف."}],
+services:[{name:"قص CNC حسب الطلب",price:"حسب الطلب",img:img2,desc:"قص وتنفيذ التصاميم بدقة عالية."},{name:"تصميم ديكورات",price:"حسب الطلب",img:img4,desc:"تصميم ديكورات خشبية مخصصة."}]
+};
+let editIndex=-1,cart=[];
+function persist(){localStorage.setItem("cncStoreData",JSON.stringify(data))}
+function apply(){document.documentElement.style.setProperty("--primary",data.colors.primary);document.documentElement.style.setProperty("--gold",data.colors.gold);document.documentElement.style.setProperty("--bg",data.colors.bg);document.documentElement.style.setProperty("--dark",data.colors.dark);document.getElementById("storeName").textContent=data.name;document.getElementById("footerName").textContent=data.name;document.getElementById("phone").textContent=data.phone;document.getElementById("email").textContent=data.email;document.getElementById("aboutText").textContent=data.about;renderAll()}
+function renderAll(){renderCategories();renderProducts();renderServices();renderAdminLists()}
+function renderCategories(){categoryGrid.innerHTML=data.categories.map((c,i)=>`<div class="card"><img src="${c.img}"><div class="card-body"><h3>${c.name}</h3><button class="btn outline" onclick="filterCat('${c.name}')">تصفح القسم ←</button></div></div>`).join("")}
+function renderProducts(){let q=(search.value||"").toLowerCase();let a=data.products.filter(p=>(p.name+p.cat+p.desc).toLowerCase().includes(q));productGrid.innerHTML=a.map((p,i)=>`<div class="card"><img src="${p.img}"><div class="card-body"><h3>${p.name}</h3><p>${p.desc}</p><span class="price">${p.price} ر.ي</span>${p.old?`<span class="old">${p.old}</span>`:""}<div class="card-actions"><button onclick="addCart('${p.name}')">🛒 أضف للسلة</button><button onclick="whatsapp('${p.name}')">واتساب</button></div></div></div>`).join("")}
+function renderServices(){serviceGrid.innerHTML=data.services.map(s=>`<div class="card"><img src="${s.img}"><div class="card-body"><h3>${s.name}</h3><p>${s.desc}</p><b class="price">${s.price}</b><div class="card-actions"><button onclick="whatsapp('${s.name}')">طلب الخدمة</button></div></div></div>`).join("")}
+function renderAdminLists(){productAdminList.innerHTML=data.products.map((p,i)=>`<div class="row"><img src="${p.img}"><span>${p.name} — ${p.price}</span><span><button class="btn" onclick="editProduct(${i})">تعديل</button> <button class="btn danger" onclick="deleteProduct(${i})">حذف</button></span></div>`).join("");categoryAdminList.innerHTML=data.categories.map((c,i)=>`<div class="row"><span>${c.name}</span><button class="btn danger" onclick="deleteCategory(${i})">حذف</button></div>`).join("");serviceAdminList.innerHTML=data.services.map((s,i)=>`<div class="row"><span>${s.name}</span><button class="btn danger" onclick="deleteService(${i})">حذف</button></div>`).join("")}
+function saveProduct(){let p={name:pName.value,price:+pPrice.value||0,old:+pOld.value||0,cat:pCat.value,img:pImg.value||img2,desc:pDesc.value||"منتج خشبي مخصص"};if(!p.name)return alert("اكتب اسم المنتج");if(editIndex<0)data.products.unshift(p);else data.products[editIndex]=p;editIndex=-1;clearProductForm();persist();renderAll();toast("تم حفظ المنتج")}
+function editProduct(i){let p=data.products[i];editIndex=i;pName.value=p.name;pPrice.value=p.price;pOld.value=p.old;pCat.value=p.cat;pImg.value=p.img;pDesc.value=p.desc}
+function deleteProduct(i){if(confirm("حذف المنتج؟")){data.products.splice(i,1);persist();renderAll()}}
+function clearProductForm(){["pName","pPrice","pOld","pCat","pImg","pDesc"].forEach(x=>document.getElementById(x).value="")}
+function saveCategory(){if(!cName.value)return;data.categories.unshift({name:cName.value,img:cImg.value||img1});cName.value=cImg.value="";persist();renderAll();toast("تمت إضافة القسم")}
+function deleteCategory(i){if(confirm("حذف القسم؟")){data.categories.splice(i,1);persist();renderAll()}}
+function saveService(){if(!sName.value)return;data.services.unshift({name:sName.value,price:sPrice.value||"حسب الطلب",img:sImg.value||img2,desc:sDesc.value||"خدمة احترافية"});sName.value=sPrice.value=sImg.value=sDesc.value="";persist();renderAll();toast("تمت إضافة الخدمة")}
+function deleteService(i){if(confirm("حذف الخدمة؟")){data.services.splice(i,1);persist();renderAll()}}
+function saveStore(){data.name=storeNameInput.value||data.name;data.phone=phoneInput.value||data.phone;data.wa=waInput.value||data.wa;data.email=emailInput.value||data.email;data.address=addressInput.value||data.address;data.about=aboutInput.value||data.about;persist();apply();toast("تم حفظ هوية المتجر")}
+function saveAppearance(){data.colors={primary:primaryInput.value,gold:goldInput.value,bg:bgInput.value,dark:darkInput.value};persist();apply();toast("تم حفظ الألوان")}
+function saveAdmin(){localStorage.setItem("cncAdmin",JSON.stringify({user:adminUser.value,pass:adminPass.value,social:socialInput.value}));toast("تم حفظ إعدادات الإدارة")}
+function openAdmin(){admin.classList.add("open");storeNameInput.value=data.name;phoneInput.value=data.phone;waInput.value=data.wa;emailInput.value=data.email;addressInput.value=data.address;aboutInput.value=data.about;primaryInput.value=data.colors.primary;goldInput.value=data.colors.gold;bgInput.value=data.colors.bg;darkInput.value=data.colors.dark}
+function closeAdmin(){admin.classList.remove("open")}
+function tab(id,el){document.querySelectorAll(".admin-section").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));el.classList.add("active")}
+function addCart(n){cart.push(n);cartCount.textContent=cart.length;toast("تمت إضافة المنتج إلى السلة")}
+function showCart(){alert(cart.length?("السلة:\n"+cart.map((x,i)=>(i+1)+". "+x).join("\n")):"السلة فارغة")}
+function whatsapp(item=""){let msg=encodeURIComponent("السلام عليكم، أريد الاستفسار عن "+item);location.href="https://wa.me/"+data.wa+"?text="+msg}
+function filterCat(c){search.value=c;renderProducts();location.hash="products"}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
+function resetDemo(){if(confirm("إعادة البيانات الافتراضية؟")){localStorage.removeItem("cncStoreData");location.reload()}}
+apply();
+</script>
+</body>
+</html>
