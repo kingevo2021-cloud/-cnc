@@ -45,9 +45,6 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 .category-cover{height:260px}
 @media(max-width:600px){.details-cover{height:210px}.details-grid{grid-template-columns:1fr}.details-content{padding:17px}}
 
-
-.hero{position:relative;overflow:hidden}
-.hero-side-image{position:absolute;left:6%;top:50%;transform:translateY(-50%);width:310px;height:260px;border:3px solid var(--gold);border-radius:18px;background:rgba(255,255,255,.08);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.22);z-index:1}.hero-side-image.show{display:flex}.hero-side-image img{width:100%;height:100%;object-fit:cover}.hero>div:last-child{position:relative;z-index:2}@media(max-width:900px){.hero-side-image{width:230px;height:190px;left:4%}}@media(max-width:550px){.hero-side-image{position:relative;left:auto;top:auto;transform:none;width:100%;height:150px;margin:0 0 18px}.hero{display:block}}
 </style>
 </head>
 <body>
@@ -59,7 +56,7 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 <button class="btn" onclick="openAdmin()">⚙ الإدارة</button>
 </nav>
 
-<section class="hero"><div id="heroSideImage" class="hero-side-image"><img id="heroSideImageEl" alt=""></div><div><h1 id="heroTitle">فن الخشب بدقة CNC</h1><p id="heroText">تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.</p><button class="btn" onclick="document.getElementById('categories').scrollIntoView()">تصفح الأقسام ←</button></div></section>
+<section class="hero"><div><h1 id="heroTitle">فن الخشب بدقة CNC</h1><p id="heroText">تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.</p><button class="btn" onclick="document.getElementById('categories').scrollIntoView()">تصفح الأقسام ←</button></div></section>
 
 <section class="features">
 <div class="feature">🛡️<b>جودة عالية</b><small>في كل التفاصيل</small></div>
@@ -76,7 +73,7 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 <section id="about" class="banner"><div><h2>من نحن</h2><p id="aboutText">متجر متخصص في أعمال CNC والنجارة والديكورات والموبيليا، نقدم تصاميم وتنفيذات مخصصة بجودة عالية.</p></div></section>
 </main>
 
-<footer id="contact"><div><div class="footer-logo" id="footerName">متجر CNC للنجارة والديكورات</div><p>تنفيذ أعمال CNC والديكورات والموبيليا حسب الطلب.</p></div><div><b>روابط سريعة</b><a href="#">الرئيسية</a><a href="#products">المنتجات</a><a href="#services">الخدمات</a></div><div><b>تواصل معنا</b><p id="phone">+967 700 000 000</p><p id="email">info@cnc-store.com</p><button class="btn" onclick="whatsapp()">واتساب</button></div></footer>
+<footer id="contact"><div><div class="footer-logo" id="footerName">متجر CNC للنجارة والديكورات</div><p>تنفيذ أعمال CNC والديكورات والموبيليا حسب الطلب.</p></div><div><b>روابط سريعة</b><a href="#">الرئيسية</a><a href="#products">المنتجات</a><a href="#services">الخدمات</a></div><div><b>تواصل معنا</b><p id="phone">+967 700 000 000</p><p id="email">info@cnc-store.com</p><p id="address"></p><button class="btn" onclick="whatsapp()">واتساب</button></div></footer>
 
 <button class="cart" onclick="showCart()">🛒<span class="cart-count" id="cartCount">0</span></button>
 <div class="toast" id="toast"></div>
@@ -93,7 +90,13 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 <label>اسم المنتج<input id="pName"></label><label>السعر<input id="pPrice" type="number"></label>
 <label>السعر السابق<input id="pOld" type="number"></label><label>القسم<input id="pCat"></label>
 <label class="full">صورة المنتج من الاستوديو<input id="pImgFile" type="file" accept="image/*" onchange="readProductImage(event)"></label>
-<label class="full">رابط الصورة (اختياري)<input id="pImg"></label><label class="full">الوصف<textarea id="pDesc"></textarea></label>
+<label class="full">رابط الصورة (اختياري)<input id="pImg"></label>
+<label class="full">الوصف المختصر<textarea id="pDesc"></textarea></label>
+<label class="full">تفاصيل المنتج<textarea id="pDetails" placeholder="تفاصيل ومميزات المنتج..."></textarea></label>
+<label>الخامة<input id="pMaterial" placeholder="مثال: MDF / خشب طبيعي"></label>
+<label>المقاسات<input id="pDimensions" placeholder="مثال: 120 × 60 سم"></label>
+<label>اللون<input id="pColor" placeholder="مثال: بني / حسب الطلب"></label>
+<label>التسليم<input id="pDelivery" placeholder="مثال: 3-7 أيام"></label>
 </div><br><button class="btn" onclick="saveProduct()">حفظ المنتج</button><button class="btn outline" onclick="clearProductForm()">جديد</button>
 <div class="admin-list" id="productAdminList"></div>
 </div>
@@ -108,16 +111,12 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 <label>نص زر البانر<input id="heroButtonInput"></label>
 <label>صورة البانر من الاستوديو<input id="heroImageFile" type="file" accept="image/*" onchange="readHeroImageFile(event)"></label>
 <label>رابط صورة البانر (اختياري)<input id="heroImageInput"></label>
-<label>صورة إضافية في يسار البانر من الاستوديو<input id="heroSideImageFile" type="file" accept="image/*" onchange="readHeroSideImageFile(event)"></label>
-<label>رابط الصورة الإضافية (اختياري)<input id="heroSideImageInput" placeholder="رابط الصورة أو اتركه فارغاً للرفع من الجهاز"></label>
-<label>حجم إطار الصورة<select id="heroSideImageSize"><option value="small">صغير</option><option value="medium" selected>متوسط</option><option value="large">كبير</option></select></label>
-<label>إظهار إطار الصورة اليسرى<input type="checkbox" id="showHeroSideImage"></label>
 <label>عنوان شريط الطلب الخاص<input id="bannerTitleInput"></label>
 <label>نص شريط الطلب<textarea id="bannerTextInput"></textarea></label>
 <label class="full">النص أعلى الموقع<input id="topTextInput"></label>
 <label>رابط صورة الشريط العلوي<input id="topImageInput" placeholder="رابط الصورة أو اتركه فارغاً للرفع من الجهاز"></label>
 <label>رفع صورة من الاستوديو<input id="topImageFile" type="file" accept="image/*" onchange="readTopImageFile(event)"></label>
-<label>وصف الصورة<input id="topImageAltInput"></label><div><button type="button" class="btn danger" onclick="clearHeroImage()">حذف صورة البانر</button></div><div><button type="button" class="btn danger" onclick="clearHeroSideImage()">حذف الصورة الإضافية اليسرى</button></div><div><button type="button" class="btn danger" onclick="clearTopImage()">حذف صورة الشريط العلوي</button></div>
+<label>وصف الصورة<input id="topImageAltInput"></label><div><button type="button" class="btn danger" onclick="clearHeroImage()">حذف صورة البانر</button></div><div><button type="button" class="btn danger" onclick="clearTopImage()">حذف صورة الشريط العلوي</button></div>
 </div>
 <h4>إظهار/إخفاء أجزاء الصفحة</h4>
 <div class="form">
@@ -157,10 +156,10 @@ footer{background:#0d1c27;color:#fff;padding:35px 6%;display:grid;grid-template-
 </div><br><button class="btn" onclick="saveCategory()">إضافة / حفظ القسم</button><button class="btn outline" onclick="clearCategoryForm()">جديد</button><div class="admin-list" id="categoryAdminList"></div></div>
 
 <div id="servicesAdmin" class="admin-section"><h3>إدارة الخدمات</h3><div class="form"><label>اسم الخدمة<input id="sName"></label><label>السعر<input id="sPrice"></label><label class="full">صورة الخدمة من الاستوديو<input id="sImgFile" type="file" accept="image/*" onchange="readServiceImage(event)"></label>
-<label class="full">رابط الصورة (اختياري)<input id="sImg"></label><label class="full">الوصف<textarea id="sDesc"></textarea></label></div><br><button class="btn" onclick="saveService()">إضافة الخدمة</button><div class="admin-list" id="serviceAdminList"></div></div>
+<label class="full">رابط الصورة (اختياري)<input id="sImg"></label><label class="full">الوصف<textarea id="sDesc"></textarea></label></div><br><button class="btn" onclick="saveService()">إضافة / حفظ الخدمة</button><button class="btn outline" onclick="clearServiceForm()">جديد</button><div class="admin-list" id="serviceAdminList"></div></div>
 
 <div id="store" class="admin-section"><h3>هوية المتجر</h3><div class="form">
-<label>اسم المتجر<input id="storeNameInput"></label><label>رابط الشعار<input id="logoInput"></label><label>رفع شعار من الجهاز<input id="logoFile" type="file" accept="image/*" onchange="readLogoFile(event)"></label><div class="admin-note full">إطار الشعار في الشريط العلوي محفوظ ضمن التصميم الأصلي ويمكن تغيير الصورة من استوديو الجهاز.</div>
+<label>اسم المتجر<input id="storeNameInput"></label><label>رابط الشعار<input id="logoInput"></label><label>رفع شعار من الجهاز<input id="logoFile" type="file" accept="image/*" onchange="readLogoFile(event)"></label><button type="button" class="btn danger" onclick="clearLogo()">حذف الشعار</button>
 <label>رقم الهاتف<input id="phoneInput"></label><label>واتساب<input id="waInput"></label><label>البريد<input id="emailInput"></label><label>العنوان<input id="addressInput"></label>
 <label class="full">نبذة المتجر<textarea id="aboutInput"></textarea></label>
 </div><br><button class="btn" onclick="saveStore()">حفظ الهوية</button></div>
@@ -182,7 +181,7 @@ name:"متجر CNC للنجارة والديكورات",logo:"",phone:"+967 700 
 about:"متجر متخصص في أعمال CNC والنجارة والديكورات والموبيليا، نقدم تصاميم وتنفيذات مخصصة بجودة عالية.",
 colors:{primary:"#5d3a1a",gold:"#c9a84c",bg:"#f5f0e8",dark:"#10202b"},
 page:{
- topImage:"", topImageAlt:"صورة المتجر في الشريط العلوي", heroSideImage:"", heroSideImageAlt:"صورة إضافية في يسار البانر", heroSideImageSize:"medium", showHeroSideImage:false,
+ topImage:"", topImageAlt:"صورة المتجر في الشريط العلوي",
  heroTitle:"فن الخشب بدقة CNC", heroText:"تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.",
  heroButton:"تصفح الأقسام", heroImage:"https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80",
  topText:"متجر أعمال CNC للنجارة والديكورات",
@@ -206,7 +205,7 @@ products:[
 services:[{name:"قص CNC حسب الطلب",price:"حسب الطلب",img:img2,desc:"قص وتنفيذ التصاميم بدقة عالية."},{name:"تصميم ديكورات",price:"حسب الطلب",img:img4,desc:"تصميم ديكورات خشبية مخصصة."}]
 };
 let editIndex=-1,categoryEditIndex=-1,serviceEditIndex=-1,cart=[];
-let pendingProductImage="",pendingCategoryImage="",pendingServiceImage="",pendingHeroImage="",pendingHeroSideImage="",pendingFeatureIcons={};
+let pendingProductImage="",pendingCategoryImage="",pendingServiceImage="",pendingHeroImage="",pendingFeatureIcons={};
 function persist(){localStorage.setItem("cncStoreData",JSON.stringify(data))}
 
 function normalizeCatalogDetails(){
@@ -215,7 +214,6 @@ function normalizeCatalogDetails(){
 }
 
 function ensurePage(){
- if(!data.page.heroSideImage) data.page.heroSideImage=""; if(!data.page.heroSideImageAlt) data.page.heroSideImageAlt="صورة إضافية في يسار البانر"; if(!data.page.heroSideImageSize) data.page.heroSideImageSize="medium"; if(typeof data.page.showHeroSideImage!=="boolean") data.page.showHeroSideImage=false;
  if(!data.page)data.page={topImage:"",topImageAlt:"صورة المتجر في الشريط العلوي",heroTitle:"فن الخشب بدقة CNC",heroText:"تصاميم وديكورات خشبية احترافية، تنفيذ حسب الطلب وجودة عالية على أرض الواقع.",heroButton:"تصفح الأقسام",heroImage:"https://images.unsplash.com/photo-1605117882932-f9e32b03fea9?auto=format&fit=crop&w=1800&q=80",topText:"متجر أعمال CNC للنجارة والديكورات",bannerTitle:"اطلب تصميمك الخاص",bannerText:"سنحوّل فكرتك إلى واقع باستخدام أحدث تقنيات CNC",features:[],sections:{top:true,nav:true,hero:true,features:true,categories:true,banner:true,products:true,services:true,about:true,footer:true}};
  if(!data.page.features||data.page.features.length!==4)data.page.features=[{icon:"🛡️",iconImage:"",title:"جودة عالية",text:"في كل التفاصيل",show:true},{icon:"⚙️",iconImage:"",title:"دقة متناهية",text:"أحدث تقنيات CNC",show:true},{icon:"🎨",iconImage:"",title:"تصاميم مخصصة",text:"حسب رغبتك",show:true},{icon:"🛠️",iconImage:"",title:"تنفيذ احترافي",text:"بأيدي خبراء",show:true}];
  if(!data.page.sections)data.page.sections={top:true,nav:true,hero:true,features:true,categories:true,banner:true,products:true,services:true,about:true,footer:true};
@@ -223,7 +221,7 @@ function ensurePage(){
 function apply(){
  ensurePage();normalizeCatalogDetails();
  document.documentElement.style.setProperty("--primary",data.colors.primary);document.documentElement.style.setProperty("--gold",data.colors.gold);document.documentElement.style.setProperty("--bg",data.colors.bg);document.documentElement.style.setProperty("--dark",data.colors.dark);
- document.getElementById("storeName").textContent=data.name;document.getElementById("footerName").textContent=data.name;document.getElementById("phone").textContent=data.phone;document.getElementById("email").textContent=data.email;document.getElementById("aboutText").textContent=data.about;
+ document.getElementById("storeName").textContent=data.name;document.getElementById("footerName").textContent=data.name;document.getElementById("phone").textContent=data.phone;document.getElementById("email").textContent=data.email;document.getElementById("address").textContent=data.address||"";document.getElementById("aboutText").textContent=data.about;
  document.querySelector(".top>div:first-child").textContent=data.page.topText;
  const topImg=document.getElementById("topImage");
  topImg.src=data.page.topImage||""; topImg.alt=data.page.topImageAlt||"صورة المتجر";
@@ -231,7 +229,6 @@ function apply(){
  document.getElementById("heroTitle").textContent=data.page.heroTitle;document.getElementById("heroText").textContent=data.page.heroText;
  document.querySelector(".hero .btn").textContent=data.page.heroButton+" ←";
  document.querySelector(".hero").style.backgroundImage='linear-gradient(90deg,rgba(10,20,25,.85),rgba(10,20,25,.25)),url("'+data.page.heroImage+'")';
- const side=document.getElementById("heroSideImage"),sideImg=document.getElementById("heroSideImageEl");if(side&&sideImg){sideImg.src=data.page.heroSideImage||"";sideImg.alt=data.page.heroSideImageAlt||"";side.classList.toggle("show",!!data.page.showHeroSideImage&&!!data.page.heroSideImage);side.style.width=data.page.heroSideImageSize==="small"?"220px":data.page.heroSideImageSize==="large"?"380px":"310px";side.style.height=data.page.heroSideImageSize==="small"?"190px":data.page.heroSideImageSize==="large"?"300px":"260px";}
  document.querySelector(".banner h2").textContent=data.page.bannerTitle;
  document.querySelector(".banner h2").nextElementSibling.textContent=data.page.bannerText;
  const feats=document.querySelectorAll(".feature");
@@ -252,12 +249,11 @@ function apply(){
 }
 function loadPageControl(){
  ensurePage();let p=data.page;
- topImageInput.value=p.topImage&&p.topImage.startsWith("http")?p.topImage:"";topImageAltInput.value=p.topImageAlt||"صورة المتجر في الشريط العلوي";heroTitleInput.value=p.heroTitle;heroTextInput.value=p.heroText;heroButtonInput.value=p.heroButton;heroImageInput.value=p.heroImage;heroSideImageInput.value=p.heroSideImage&&p.heroSideImage.startsWith("data:")?"":(p.heroSideImage||"");showHeroSideImage.checked=!!p.showHeroSideImage;heroSideImageSize.value=p.heroSideImageSize||"medium";pendingHeroSideImage="";bannerTitleInput.value=p.bannerTitle;bannerTextInput.value=p.bannerText;topTextInput.value=p.topText;
+ topImageInput.value=p.topImage&&p.topImage.startsWith("http")?p.topImage:"";topImageAltInput.value=p.topImageAlt||"صورة المتجر في الشريط العلوي";heroTitleInput.value=p.heroTitle;heroTextInput.value=p.heroText;heroButtonInput.value=p.heroButton;heroImageInput.value=p.heroImage;bannerTitleInput.value=p.bannerTitle;bannerTextInput.value=p.bannerText;topTextInput.value=p.topText;
  ["top","nav","hero","features","categories","banner","products","services","about","footer"].forEach(k=>document.getElementById("show"+k.charAt(0).toUpperCase()+k.slice(1)).checked=p.sections[k]!==false);
  p.features.forEach((f,i)=>{document.getElementById("f"+(i+1)+"title").value=f.title;document.getElementById("f"+(i+1)+"text").value=f.text;document.getElementById("f"+(i+1)+"icon").value=f.icon||"";pendingFeatureIcons[i+1]=f.iconImage||""});
 }
 function clearHeroImage(){ensurePage();pendingHeroImage="";data.page.heroImage="";persist();apply();loadPageControl();toast("تم حذف صورة البانر")}
-function clearHeroSideImage(){ensurePage();pendingHeroSideImage="";data.page.heroSideImage="";data.page.showHeroSideImage=false;persist();apply();loadPageControl();toast("تم حذف الصورة الإضافية")}
 function clearTopImage(){
  ensurePage();data.page.topImage="";persist();apply();loadPageControl();toast("تم حذف صورة الشريط العلوي");
 }
@@ -271,12 +267,13 @@ function readTopImageFile(e){
 }
 function savePageControl(){
  ensurePage();let p=data.page;
- p.topImage=topImageInput.value||p.topImage||"";p.topImageAlt=topImageAltInput.value||"صورة المتجر في الشريط العلوي";p.heroTitle=heroTitleInput.value||p.heroTitle;p.heroText=heroTextInput.value||p.heroText;p.heroButton=heroButtonInput.value||p.heroButton;p.heroImage=pendingHeroImage||heroImageInput.value||p.heroImage;p.heroSideImage=pendingHeroSideImage||heroSideImageInput.value||p.heroSideImage||"";p.showHeroSideImage=!!showHeroSideImage.checked;p.heroSideImageSize=heroSideImageSize.value||"medium";p.bannerTitle=bannerTitleInput.value||p.bannerTitle;p.bannerText=bannerTextInput.value||p.bannerText;p.topText=topTextInput.value||p.topText;
+ p.topImage=topImageInput.value||p.topImage||"";p.topImageAlt=topImageAltInput.value||"صورة المتجر في الشريط العلوي";p.heroTitle=heroTitleInput.value||p.heroTitle;p.heroText=heroTextInput.value||p.heroText;p.heroButton=heroButtonInput.value||p.heroButton;p.heroImage=pendingHeroImage||heroImageInput.value||p.heroImage;p.bannerTitle=bannerTitleInput.value||p.bannerTitle;p.bannerText=bannerTextInput.value||p.bannerText;p.topText=topTextInput.value||p.topText;
  ["top","nav","hero","features","categories","banner","products","services","about","footer"].forEach(k=>p.sections[k]=document.getElementById("show"+k.charAt(0).toUpperCase()+k.slice(1)).checked);
  for(let i=0;i<4;i++){p.features[i]={icon:document.getElementById("f"+(i+1)+"icon").value||"•",iconImage:pendingFeatureIcons[i+1]||p.features[i].iconImage||"",title:document.getElementById("f"+(i+1)+"title").value||"",text:document.getElementById("f"+(i+1)+"text").value||"",show:true}}
- persist();apply();pendingHeroImage="";pendingHeroSideImage="";Object.keys(pendingFeatureIcons).forEach(k=>pendingFeatureIcons[k]="");toast("تم حفظ أجزاء الصفحة وتطبيق التعديلات");
+ persist();apply();pendingHeroImage="";Object.keys(pendingFeatureIcons).forEach(k=>pendingFeatureIcons[k]="");toast("تم حفظ أجزاء الصفحة وتطبيق التعديلات");
 }
 function readLogoFile(e){readLocalImage(e.target.files[0],v=>{data.logo=v;logoInput.value="";persist();apply();toast("تم تحديث الشعار من الجهاز")})}
+function clearLogo(){if(confirm("حذف شعار المتجر؟")){data.logo="";logoInput.value="";document.getElementById("logoFile").value="";persist();apply();toast("تم حذف الشعار")}}
 
 
 function readLocalImage(file, done){
@@ -292,7 +289,6 @@ function readProductImage(e){readLocalImage(e.target.files[0],v=>{pendingProduct
 function readCategoryImage(e){readLocalImage(e.target.files[0],v=>{pendingCategoryImage=v;toast("تم اختيار صورة القسم من الجهاز")})}
 function readServiceImage(e){readLocalImage(e.target.files[0],v=>{pendingServiceImage=v;toast("تم اختيار صورة الخدمة من الجهاز")})}
 function readHeroImageFile(e){readLocalImage(e.target.files[0],v=>{pendingHeroImage=v;data.page.heroImage=v;persist();apply();toast("تم اختيار صورة البانر من الجهاز")})}
-function readHeroSideImageFile(e){readLocalImage(e.target.files[0],v=>{pendingHeroSideImage=v;data.page.heroSideImage=v;data.page.showHeroSideImage=true;persist();apply();loadPageControl();toast("تم اختيار الصورة الإضافية من الجهاز")})}
 function readFeatureIcon(e,i){readLocalImage(e.target.files[0],v=>{pendingFeatureIcons[i]=v;toast("تم اختيار أيقونة الميزة من الجهاز")})}
 
 
@@ -330,24 +326,70 @@ function orderProductWhatsApp(i){
 }
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeDetailsModal()});
 
-function renderAll(){renderCategories();renderProducts();renderServices();renderAdminLists()}
-function renderCategories(){categoryGrid.innerHTML=data.categories.map((c,i)=>`<div class="card"><img src="${c.img}"><div class="card-body"><h3>${c.name}</h3><button class="btn outline" onclick="filterCat('${c.name}')">تصفح القسم ←</button></div></div>`).join("")}
-function renderProducts(){let q=(search.value||"").toLowerCase();let a=data.products.filter(p=>(p.name+p.cat+p.desc).toLowerCase().includes(q));productGrid.innerHTML=a.map((p,i)=>`<div class="card"><img src="${p.img}"><div class="card-body"><h3>${p.name}</h3><p>${p.desc}</p><span class="price">${p.price} ر.ي</span>${p.old?`<span class="old">${p.old}</span>`:""}<div class="card-actions"><button onclick="addCart('${p.name}')">🛒 أضف للسلة</button><button onclick="whatsapp('${p.name}')">واتساب</button></div></div></div>`).join("")}
-function renderServices(){serviceGrid.innerHTML=data.services.map(s=>`<div class="card"><img src="${s.img}"><div class="card-body"><h3>${s.name}</h3><p>${s.desc}</p><b class="price">${s.price}</b><div class="card-actions"><button onclick="whatsapp('${s.name}')">طلب الخدمة</button></div></div></div>`).join("")}
-function renderAdminLists(){productAdminList.innerHTML=data.products.map((p,i)=>`<div class="row"><img src="${p.img}"><span>${p.name} — ${p.price}</span><span><button class="btn" onclick="editProduct(${i})">تعديل</button> <button class="btn danger" onclick="deleteProduct(${i})">حذف</button></span></div>`).join("");categoryAdminList.innerHTML=data.categories.map((c,i)=>`<div class="row"><img src="${c.img}"><span>${c.name}</span><span><button class="btn" onclick="editCategory(${i})">تعديل</button> <button class="btn danger" onclick="deleteCategory(${i})">حذف</button></span></div>`).join("");
-serviceAdminList.innerHTML=data.services.map((s,i)=>`<div class="row"><img src="${s.img}"><span>${s.name}</span><span><button class="btn" onclick="editService(${i})">تعديل</button> <button class="btn danger" onclick="deleteService(${i})">حذف</button></span></div>`).join("")}
-function saveProduct(){let p={name:pName.value,price:+pPrice.value||0,old:+pOld.value||0,cat:pCat.value,img:pendingProductImage||pImg.value||img2,desc:pDesc.value||"منتج خشبي مخصص",details:pDetails.value||"",material:pMaterial.value||"حسب الطلب",dimensions:pDimensions.value||"حسب الطلب",color:pColor.value||"حسب الطلب",delivery:pDelivery.value||"يحدد عند الطلب"};if(!p.name)return alert("اكتب اسم المنتج");if(editIndex<0)data.products.unshift(p);else data.products[editIndex]=p;editIndex=-1;clearProductForm();persist();renderAll();toast("تم حفظ المنتج")}
-function editProduct(i){let p=data.products[i];editIndex=i;pendingProductImage="";pName.value=p.name;pPrice.value=p.price;pOld.value=p.old;pCat.value=p.cat;pImg.value=p.img.startsWith("data:")?"":p.img;pDesc.value=p.desc;pDetails.value=p.details||"";pMaterial.value=p.material||"حسب الطلب";pDimensions.value=p.dimensions||"حسب الطلب";pColor.value=p.color||"حسب الطلب";pDelivery.value=p.delivery||"يحدد عند الطلب"}
-function deleteProduct(i){if(confirm("حذف المنتج؟")){data.products.splice(i,1);persist();renderAll()}}
-function clearProductForm(){["pName","pPrice","pOld","pCat","pImg","pDesc","pDetails","pMaterial","pDimensions","pColor","pDelivery","pImgFile"].forEach(x=>document.getElementById(x).value="");pendingProductImage="";editIndex=-1}
-function saveCategory(){if(!cName.value)return;let item={name:cName.value,img:pendingCategoryImage||cImg.value||img1,desc:cDesc.value||"",details:cDetails.value||"",showProducts:true};if(categoryEditIndex<0)data.categories.unshift(item);else data.categories[categoryEditIndex]=item;categoryEditIndex=-1;clearCategoryForm();persist();renderAll();toast("تم حفظ القسم")}
-function editCategory(i){categoryEditIndex=i;pendingCategoryImage="";let c=data.categories[i];cName.value=c.name;cImg.value=c.img.startsWith("data:")?"":c.img;cDesc.value=c.desc||"";cDetails.value=c.details||""}
-function clearCategoryForm(){categoryEditIndex=-1;pendingCategoryImage="";cName.value="";cImg.value="";cDesc.value="";cDetails.value="";cImgFile.value=""}
-function deleteCategory(i){if(confirm("حذف القسم؟")){data.categories.splice(i,1);persist();renderAll()}}
-function saveService(){if(!sName.value)return;let item={name:sName.value,price:sPrice.value||"حسب الطلب",img:pendingServiceImage||sImg.value||img2,desc:sDesc.value||"خدمة احترافية"};if(serviceEditIndex<0)data.services.unshift(item);else data.services[serviceEditIndex]=item;serviceEditIndex=-1;pendingServiceImage="";sName.value=sPrice.value=sImg.value=sDesc.value="";sImgFile.value="";persist();renderAll();toast("تم حفظ الخدمة")}
-function editService(i){serviceEditIndex=i;pendingServiceImage="";let s=data.services[i];sName.value=s.name;sPrice.value=s.price;sImg.value=s.img.startsWith("data:")?"":s.img;sDesc.value=s.desc}
-function deleteService(i){if(confirm("حذف الخدمة؟")){data.services.splice(i,1);persist();renderAll()}}
-function saveStore(){data.logo=logoInput.value||data.logo;data.name=storeNameInput.value||data.name;data.phone=phoneInput.value||data.phone;data.wa=waInput.value||data.wa;data.email=emailInput.value||data.email;data.address=addressInput.value||data.address;data.about=aboutInput.value||data.about;persist();apply();toast("تم حفظ هوية المتجر")}
+
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function normalizeCatalogDetails(){
+ data.products=(data.products||[]).map(p=>Object.assign({details:"",material:"حسب الطلب",dimensions:"حسب الطلب",color:"حسب الطلب",delivery:"يحدد عند الطلب"},p));
+ data.categories=(data.categories||[]).map(c=>Object.assign({desc:"",details:""},c));
+}
+function renderAll(){normalizeCatalogDetails();renderCategories();renderProducts();renderServices();renderAdminLists()}
+function renderCategories(){
+ categoryGrid.innerHTML=(data.categories||[]).map((c,i)=>`<div class="card"><img src="${esc(c.img||img1)}" alt="${esc(c.name)}"><div class="card-body"><h3>${esc(c.name)}</h3>${c.desc?`<p>${esc(c.desc)}</p>`:""}<div class="card-actions"><button onclick="openCategoryDetails(${i})">التفاصيل</button><button onclick="filterCat(${i})">تصفح القسم ←</button></div></div></div>`).join("");
+}
+function renderProducts(){
+ const q=(search.value||"").trim().toLowerCase();
+ const a=(data.products||[]).map((p,i)=>({p,i})).filter(x=>!q||[x.p.name,x.p.cat,x.p.desc,x.p.details,x.p.material,x.p.dimensions,x.p.color].join(" ").toLowerCase().includes(q));
+ productGrid.innerHTML=a.map(({p,i})=>`<div class="card"><img src="${esc(p.img||img2)}" alt="${esc(p.name)}"><div class="card-body"><h3>${esc(p.name)}</h3><p>${esc(p.desc||"")}</p><span class="price">${esc(p.price)} ر.ي</span>${p.old?`<span class="old">${esc(p.old)} ر.ي</span>`:""}<div class="card-actions"><button onclick="openProductDetails(${i})">التفاصيل</button><button onclick="addCartByIndex(${i})">🛒 أضف للسلة</button><button onclick="whatsappProduct(${i})">واتساب</button></div></div></div>`).join("");
+}
+function renderServices(){
+ serviceGrid.innerHTML=(data.services||[]).map((s,i)=>`<div class="card"><img src="${esc(s.img||img2)}" alt="${esc(s.name)}"><div class="card-body"><h3>${esc(s.name)}</h3><p>${esc(s.desc||"")}</p><b class="price">${esc(s.price||"حسب الطلب")}</b><div class="card-actions"><button onclick="whatsappService(${i})">طلب الخدمة</button></div></div></div>`).join("");
+}
+function renderAdminLists(){
+ productAdminList.innerHTML=(data.products||[]).map((p,i)=>`<div class="row"><img src="${esc(p.img||img2)}"><span>${esc(p.name)} — ${esc(p.price)}</span><span><button class="btn" onclick="editProduct(${i})">تعديل</button><button class="btn danger" onclick="deleteProduct(${i})">حذف</button></span></div>`).join("");
+ categoryAdminList.innerHTML=(data.categories||[]).map((c,i)=>`<div class="row"><img src="${esc(c.img||img1)}"><span>${esc(c.name)}</span><span><button class="btn" onclick="editCategory(${i})">تعديل</button><button class="btn danger" onclick="deleteCategory(${i})">حذف</button></span></div>`).join("");
+ serviceAdminList.innerHTML=(data.services||[]).map((s,i)=>`<div class="row"><img src="${esc(s.img||img2)}"><span>${esc(s.name)}</span><span><button class="btn" onclick="editService(${i})">تعديل</button><button class="btn danger" onclick="deleteService(${i})">حذف</button></span></div>`).join("");
+}
+function saveProduct(){
+ const p={name:pName.value.trim(),price:Number(pPrice.value)||0,old:Number(pOld.value)||0,cat:pCat.value.trim(),img:pendingProductImage||pImg.value.trim()||img2,desc:pDesc.value.trim()||"منتج خشبي مخصص",details:pDetails.value.trim(),material:pMaterial.value.trim()||"حسب الطلب",dimensions:pDimensions.value.trim()||"حسب الطلب",color:pColor.value.trim()||"حسب الطلب",delivery:pDelivery.value.trim()||"يحدد عند الطلب"};
+ if(!p.name){alert("اكتب اسم المنتج");return}
+ const editing=editIndex>=0;
+ if(editing)data.products[editIndex]=p;else data.products.unshift(p);
+ persist();clearProductForm();renderAll();toast(editing?"تم تعديل المنتج":"تمت إضافة المنتج");
+}
+function editProduct(i){
+ const p=data.products[i];if(!p)return;editIndex=i;pendingProductImage="";
+ pName.value=p.name||"";pPrice.value=p.price||0;pOld.value=p.old||0;pCat.value=p.cat||"";
+ pImg.value=(p.img||"").startsWith("data:")?"":(p.img||"");pDesc.value=p.desc||"";pDetails.value=p.details||"";
+ pMaterial.value=p.material||"حسب الطلب";pDimensions.value=p.dimensions||"حسب الطلب";pColor.value=p.color||"حسب الطلب";pDelivery.value=p.delivery||"يحدد عند الطلب";
+}
+function deleteProduct(i){if(data.products[i]&&confirm("هل تريد حذف هذا المنتج؟")){data.products.splice(i,1);persist();renderAll();toast("تم حذف المنتج")}}
+function clearProductForm(){["pName","pPrice","pOld","pCat","pImg","pDesc","pDetails","pMaterial","pDimensions","pColor","pDelivery","pImgFile"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""});pendingProductImage="";editIndex=-1}
+function saveCategory(){
+ const item={name:cName.value.trim(),img:pendingCategoryImage||cImg.value.trim()||img1,desc:cDesc.value.trim(),details:cDetails.value.trim(),showProducts:true};
+ if(!item.name){alert("اكتب اسم القسم");return}
+ const editing=categoryEditIndex>=0;if(editing)data.categories[categoryEditIndex]=item;else data.categories.unshift(item);
+ persist();clearCategoryForm();renderAll();toast(editing?"تم تعديل القسم":"تمت إضافة القسم");
+}
+function editCategory(i){const c=data.categories[i];if(!c)return;categoryEditIndex=i;pendingCategoryImage="";cName.value=c.name||"";cImg.value=(c.img||"").startsWith("data:")?"":(c.img||"");cDesc.value=c.desc||"";cDetails.value=c.details||""}
+function clearCategoryForm(){categoryEditIndex=-1;pendingCategoryImage="";["cName","cImg","cDesc","cDetails","cImgFile"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""})}
+function deleteCategory(i){if(data.categories[i]&&confirm("هل تريد حذف هذا القسم؟")){data.categories.splice(i,1);persist();renderAll();toast("تم حذف القسم")}}
+function saveService(){
+ const item={name:sName.value.trim(),price:sPrice.value.trim()||"حسب الطلب",img:pendingServiceImage||sImg.value.trim()||img2,desc:sDesc.value.trim()||"خدمة احترافية"};
+ if(!item.name){alert("اكتب اسم الخدمة");return}
+ const editing=serviceEditIndex>=0;if(editing)data.services[serviceEditIndex]=item;else data.services.unshift(item);
+ persist();clearServiceForm();renderAll();toast(editing?"تم تعديل الخدمة":"تمت إضافة الخدمة");
+}
+function editService(i){const s=data.services[i];if(!s)return;serviceEditIndex=i;pendingServiceImage="";sName.value=s.name||"";sPrice.value=s.price||"";sImg.value=(s.img||"").startsWith("data:")?"":(s.img||"");sDesc.value=s.desc||""}
+function clearServiceForm(){serviceEditIndex=-1;pendingServiceImage="";["sName","sPrice","sImg","sDesc","sImgFile"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""})}
+function deleteService(i){if(data.services[i]&&confirm("هل تريد حذف هذه الخدمة؟")){data.services.splice(i,1);persist();renderAll();toast("تم حذف الخدمة")}}
+function addCartByIndex(i){const p=data.products[i];if(!p)return;cart.push({name:p.name,price:p.price});cartCount.textContent=cart.length;toast("تمت إضافة المنتج إلى السلة")}
+function showCart(){if(!cart.length){alert("السلة فارغة");return}const text=cart.map((x,i)=>`${i+1}. ${x.name} — ${x.price} ر.ي`).join("\n");if(confirm("السلة:\n\n"+text+"\n\nإرسال الطلب عبر واتساب؟")){const msg=encodeURIComponent("السلام عليكم، أريد طلب:\n"+cart.map(x=>`- ${x.name} (${x.price} ر.ي)`).join("\n"));window.open("https://wa.me/"+data.wa+"?text="+msg,"_blank")}}
+function whatsappProduct(i){const p=data.products[i];if(!p)return;const msg=encodeURIComponent(`السلام عليكم، أريد طلب المنتج: ${p.name}\nالسعر: ${p.price} ر.ي\nالخامة: ${p.material||"حسب الطلب"}\nالمقاسات: ${p.dimensions||"حسب الطلب"}\nاللون: ${p.color||"حسب الطلب"}\nالتسليم: ${p.delivery||"يحدد عند الطلب"}`);window.open("https://wa.me/"+data.wa+"?text="+msg,"_blank")}
+function whatsappService(i){const s=data.services[i];if(!s)return;const msg=encodeURIComponent(`السلام عليكم، أريد طلب الخدمة: ${s.name}\nالسعر: ${s.price||"حسب الطلب"}`);window.open("https://wa.me/"+data.wa+"?text="+msg,"_blank")}
+function whatsapp(item=""){const msg=encodeURIComponent("السلام عليكم، أريد الاستفسار عن "+item);window.open("https://wa.me/"+data.wa+"?text="+msg,"_blank")}
+function filterCat(i){const c=typeof i==="number"?data.categories[i]:data.categories.find(x=>x.name===i);if(!c)return;search.value=c.name;renderProducts();document.getElementById("products").scrollIntoView({behavior:"smooth"})}
+function toast(t){const x=document.getElementById("toast");x.textContent=t;x.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>x.classList.remove("show"),1800)}
+function saveStore(){if(logoInput.value.trim())data.logo=logoInput.value.trim();data.name=storeNameInput.value||data.name;data.phone=phoneInput.value||data.phone;data.wa=waInput.value||data.wa;data.email=emailInput.value||data.email;data.address=addressInput.value||data.address;data.about=aboutInput.value||data.about;persist();apply();toast("تم حفظ هوية المتجر")}
 function saveAppearance(){data.colors={primary:primaryInput.value,gold:goldInput.value,bg:bgInput.value,dark:darkInput.value};persist();apply();toast("تم حفظ الألوان")}
 function saveAdmin(){localStorage.setItem("cncAdmin",JSON.stringify({user:adminUser.value,pass:adminPass.value,social:socialInput.value}));toast("تم حفظ إعدادات الإدارة")}
 function openAdmin(){admin.classList.add("open");loadPageControl();storeNameInput.value=data.name;logoInput.value=data.logo&&data.logo.startsWith("http")?data.logo:"";phoneInput.value=data.phone;waInput.value=data.wa;emailInput.value=data.email;addressInput.value=data.address;aboutInput.value=data.about;primaryInput.value=data.colors.primary;goldInput.value=data.colors.gold;bgInput.value=data.colors.bg;darkInput.value=data.colors.dark}
